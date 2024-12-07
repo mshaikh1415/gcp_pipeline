@@ -1,7 +1,8 @@
-FROM nginx:alpine
+# Use the official Nginx image as the base image
+FROM nginx:latest
 
-# Copy the contents of your local directory to the container's /usr/share/nginx/html directory
-COPY . /usr/share/nginx/html
+# Copy the custom nginx configuration (optional, if you want to customize)
+# COPY nginx.conf /etc/nginx/nginx.conf
 
-# Expose the port for the container
+# Expose port 80 for HTTP traffic
 EXPOSE 80
