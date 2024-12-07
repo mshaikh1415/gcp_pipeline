@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/rapid-shine-435918-e2/minaz-100966820:$COMMIT_SHA', '.']
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/rapid-shine-435918-e2/minaz-100966820:$COMMIT_SHA', './']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-central1-docker.pkg.dev/rapid-shine-435918-e2/minaz-100966820:$COMMIT_SHA']
 
