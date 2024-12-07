@@ -1,19 +1,7 @@
-FROM node:14-alpine
+FROM nginx:alpine
 
-# Set the working directory inside the container
-WORKDIR /usr/src/app
+# Copy the contents of your local directory to the container's /usr/share/nginx/html directory
+COPY . /usr/share/nginx/html
 
-# Copy the package.json and package-lock.json files to the working directory
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the application source code
-COPY . .
-
-# Expose the port the app runs on
-EXPOSE 8080
-
-# Start the application
-CMD ["npm", "start"]
+# Expose the port for the container
+EXPOSE 80
