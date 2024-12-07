@@ -6,15 +6,25 @@ steps:
       - "-t"
       - "us-central1-docker.pkg.dev/rapid-shine-435918-e2/minaz-100966820/my-image:$COMMIT_SHA"
       - "./"
-  
+
   # Step 2: Push the Docker image to Google Container Registry
   - name: "gcr.io/cloud-builders/docker"
     args:
       - "push"
       - "us-central1-docker.pkg.dev/rapid-shine-435918-e2/minaz-100966820/my-image:$COMMIT_SHA"
   
+  # Step 3: Deploy the application to Google Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud run deploy firstname-studentid-service \
+        --image us-central1-docker.pkg.dev/rapid-shine-435918-e2/minaz-100966820/my-image:$COMMIT_SHA \
+        --region us-central1 --allow-unauthenticated
+  
 images:
   - "us-central1-docker.pkg.dev/rapid-shine-435918-e2/minaz-100966820/my-image:$COMMIT_SHA"
-  
+
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
